@@ -1,0 +1,80 @@
+/* Cover */
+.cur-view-content .wiki-page-cover {
+  position: relative;
+  height: 30vh;
+  width: 100%;
+}
+
+.wiki-page-cover__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wiki-cover-controller-btn {
+  padding: 0 .5rem;
+  background: rgba(0,0,0, 0.5);
+  height: 28px;
+  line-height: 28px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.wiki-cover-controller-btn:hover {
+  background: rgba(0,0,0, 0.7);
+}
+
+.wiki-page-cover-popover {
+  max-width: max-content !important;
+}
+
+.wiki-page-cover-panel__header {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 14px;
+}
+
+.wiki-page-cover-panel__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.wiki-page-cover-panel .wiki-cover-gallery-img {
+  width: 240px;
+  height: 72px;
+  cursor: pointer;
+}
+
+.wiki-page-cover-panel .wiki-cover-gallery-img:hover {
+  filter: brightness(1.1);
+}
+
+/* icon */
+
+/* common */
+.wiki-page-panel .popover-header {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 14px;
+}
+
+.wiki-page-panel .popover-header>span {
+  border-radius: 4px;
+  padding: 2px 8px;
+  user-select: none;
+}
+
+.wiki-page-panel .popover-header>span:last-child:hover {
+  background-color: #efefef;
+  cursor: pointer;
+}

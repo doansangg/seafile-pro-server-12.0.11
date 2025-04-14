@@ -1,0 +1,25 @@
+.metadata-tree-view .metadata-views-icon {
+  height: 1rem;
+  width: 1rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+.metadata-tree-view .sf-metadata-view-input {
+  height: 24px;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+.metadata-tree-view .sf-metadata-view-input.rename {
+  width: 95%;
+}
+
+.metadata-tree-view .metadata-views-icon {
+  fill: #666;
+}
+
+.metadata-tree-view .sf-dropdown-toggle {
+  display: inline-block;
+  transform: rotate(90deg);
+}

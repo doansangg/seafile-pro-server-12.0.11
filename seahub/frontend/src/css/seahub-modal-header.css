@@ -1,0 +1,23 @@
+.modal .seahub-modal-btn.close {
+  padding: 14px 16px;
+  opacity: 1;
+}
+
+.modal .seahub-modal-btn.close:not(:disabled):not(.disabled):hover {
+  opacity: 1;
+}
+
+.modal .seahub-modal-btn .seahub-modal-btn-inner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+}
+
+.modal .seahub-modal-btn .seahub-modal-btn-inner:hover {
+  background-color: #efefef;
+}
+
+.modal .seahub-modal-btn .seahub-modal-btn-inner .sf3-font {
+  color: #666;
+}

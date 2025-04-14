@@ -1,0 +1,210 @@
+Simple request
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json; charset=utf-8; indent=4' 'http://127.0.0.1:9200/repofiles/_search/?pretty' -d '{
+    "query": {
+        "bool": {
+            "filter": [
+                {
+                    "terms": {
+                        "repo": [
+                            "61f78c22-2ba5-45d3-9ada-7cae5ca733dc",
+                            "4ed448cf-86ab-458a-8664-2d91aec32325"
+                        ]
+                    }
+                },
+                {
+                    "terms": {
+                        "suffix": ["md"]
+                    }
+                }
+            ],
+            "should": [
+                {"match": {"filename": {"query": "test", "minimum_should_match": "-25%"}}},
+                {"match": {"content": {"query": "test", "minimum_should_match": "-25%"}}},
+                {"match": {"filename.ngram": {"query": "test", "minimum_should_match": "80%"}}}
+            ],
+            "minimum_should_match": 1
+        }
+    },
+    "from": 0,
+    "size": 10,
+    "_source": {
+        "includes": ["repo", "path", "filename", "is_dir"]
+    },
+    "highlight": {
+        "fields": {
+            "content": {
+                "type": "fvh"
+            }
+        },
+        "pre_tags": ["<b>"],
+        "post_tags": ["</b>"],
+        "encoder": "html",
+        "require_field_match": true
+    }
+}'
+
+curl -X POST -H "Content-Type: application/json" "http://127.0.0.1:9200/repofiles/_search/?pretty" -d "{
+    "query": {
+        "bool": {
+            "filter": [
+                {
+                    "bool": {
+                        "should": [
+                            {
+                                "bool": {
+                                    "must": [
+                                        {"term": {"repo": "c9c6e41e-209b-44e0-b6f1-7cbfa16d6c3f"}},
+                                        {"prefix": {"path": "/folder"}}
+                                    ]
+                                }
+                            },
+                            {
+                                "bool": {
+                                    "must": [
+                                        {"term": {"repo": "101f7977-a22e-4861-b7ec-f8b7da947054"}},
+                                        {"prefix": {"path": "/test"}}
+                                    ]
+                                }
+                            },
+                            {
+                                "terms": {
+                                    "repo": [
+                                        "61f78c22-2ba5-45d3-9ada-7cae5ca733dc",
+                                        "4ed448cf-86ab-458a-8664-2d91aec32325"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "terms": {
+                        "suffix": ["md"]
+                    }
+                }
+            ],
+            "should": [
+                {"match": {"filename": {"query": "test", "minimum_should_match": "-25%"}}},
+                {"match": {"content": {"query": "test", "minimum_should_match": "-25%"}}},
+                {"match": {"filename.ngram": {"query": "test", "minimum_should_match": "80%"}}}
+            ],
+            "minimum_should_match": 1
+        }
+    },
+    "from": 0,
+    "size": 10,
+    "_source": {
+        "includes": ["repo", "path", "filename", "is_dir"]
+    },
+    "highlight": {
+        "fields": {
+            "content": {
+                "type": "fvh"
+            }
+        },
+        "pre_tags": ["<b>"],
+        "post_tags": ["</b>"],
+        "encoder": "html",
+        "require_field_match": true
+    }
+}'
+
+---------------------------------------------------------
+Response
+{
+    "took": 38,
+    "timed_out": False,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 5,
+            "relation": "eq"
+        },
+        "max_score": 5.614246,
+        "hits": [
+            {
+                "_index": "repofiles",
+                "_id": "61f78c22-2ba5-45d3-9ada-7cae5ca733dc/test.md",
+                "_score": 5.614246,
+                "_source": {
+                    "path": "/test.md",
+                    "filename": "test.md",
+                    "is_dir": False,
+                    "repo": "61f78c22-2ba5-45d3-9ada-7cae5ca733dc"
+                },
+                "highlight": {
+                    "content": [
+                        "# <b>test</b>\n\n测试项：\n\n* 前端事件\n  * [x] 文件活动记录\n  * [x] 文件历史记录\n  * [x] 文件更新事件\n  * [x] 文件审计\n  * [x] 权限审计\n  * [x] 草稿发布事件"
+                    ]
+                }
+            },
+            {
+                "_index": "repofiles",
+                "_id": "4ed448cf-86ab-458a-8664-2d91aec32325/test.txt",
+                "_score": 4.2188354,
+                "_source": {
+                    "path": "/test.txt",
+                    "filename": "test.txt",
+                    "is_dir": False,
+                    "repo": "4ed448cf-86ab-458a-8664-2d91aec32325"
+                },
+                "highlight": {
+                    "content": ["<b>test</b>"]
+                }
+            },
+            {
+                "_index": "repofiles",
+                "_id": "4ed448cf-86ab-458a-8664-2d91aec32325/test.md",
+                "_score": 3.8143435,
+                "_source": {
+                    "path": "/test.md",
+                    "filename": "test.md",
+                    "is_dir": False,
+                    "repo": "4ed448cf-86ab-458a-8664-2d91aec32325"
+                },
+                "highlight": {
+                    "content": [
+                        "# <b>test</b>\n\n```python\nimport difflib\n\n\nd = difflib.Differ()\ndiff = d.compare(s1.splitlines(), s2.splitlines())"
+                    ]
+                }
+            },
+            {
+                "_index": "repofiles",
+                "_id": "4ed448cf-86ab-458a-8664-2d91aec32325/folder/eicar.com.txt",
+                "_score": 1.4309621,
+                "_source": {
+                    "path": "/folder/eicar.com.txt",
+                    "filename": "eicar.com.txt",
+                    "is_dir": False,
+                    "repo": "4ed448cf-86ab-458a-8664-2d91aec32325"
+                },
+                "highlight": {
+                    "content": [
+                        "P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-<b>TEST</b>-FILE!$H+H*"
+                    ]
+                }
+            },
+            {
+                "_index": "repofiles",
+                "_id": "4ed448cf-86ab-458a-8664-2d91aec32325/home.md",
+                "_score": 0.5199213,
+                "_source": {
+                    "path": "/home.md",
+                    "filename": "home.md",
+                    "is_dir": False,
+                    "repo": "4ed448cf-86ab-458a-8664-2d91aec32325"
+                },
+                "highlight": {
+                    "content": [
+                        "# <b>test</b>\n\n## 二\n\n试验\n\n[Some random link](javascript:alert(document.domain))\n\n### 三\n\n`aaa`\n\n实验\n\n```python"
+                    ]
+                }
+            }
+        ]
+    }
+}

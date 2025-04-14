@@ -1,0 +1,13 @@
+export PYTHONPATH=/data/github/:/data/github/seahub/thirdpart/:/data/github/seahub-extra/:/data/github/seahub:$PYTHONPATH
+export PYTHONPATH=/data/github/seafobj:$PYTHONPATH
+
+export SEAHUB_DIR=/data/github/seahub
+export CCNET_CONF_DIR=/data/data/ccnet
+export SEAFILE_CONF_DIR=/data/data/seafile-data
+export EVENTS_CONFIG_FILE=/data/github/seafevents/events.conf
+
+if [[ $# == 1 && $1 == "clear" ]]; then
+    python -m seafes.indexes.repo_file.index_local --loglevel debug clear
+else
+    python -m seafes.indexes.repo_file.index_local --loglevel debug update
+fi
